@@ -141,8 +141,9 @@ savehistory("20110617-Tutorial.Rhistory")
 #       every header begins with a letter
 #       no header contains punctuation marks
 #    It's probably also best to avoid spaces in header names (R will convert them to periods)
+#    and to stick to lower case letters.
 #       e.g.:   First Name     would become     First.Name     in R
-#    which is a bit cumbersome... easier probably to name such columns
+#    which is a bit cumbersome to type... easier probably to name such columns
 #       firstname
 
 
@@ -243,6 +244,8 @@ head(rawdata)
 
 
 
+
+
 #Generate descriptive statistics
 summary(rawdata)
 
@@ -260,6 +263,8 @@ levels(rawdata$gender)
 # [1] "f" "m"
 #
 # indicating that F == 1 and M == 2
+
+
 
 
 # Let's add a couple of functions to our workspace to be able to
@@ -293,6 +298,10 @@ panel.hist = function(x, ...)
 # Note that panel.smooth is built in, so we don't need to define it.
 pairs(rawdata, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
 
+
+
+
+
 # Save the plot to a PDF in the working directory
 # In R-Studio, you can do this either using the menus
 #        Plots > Save plot as PDF...
@@ -311,6 +320,9 @@ dev.off()
 jpeg("pairsplot.jpg")
 pairs(rawdata, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
 dev.off()
+
+
+
 
 
 # 5. Install any packages you need for more advanced/specialized analyses
@@ -335,14 +347,20 @@ library(granova)
 
 #    and scrolling to the bottom of that help page.
 
-# granova.ds needs a data paramater that's just our dependent scores
+# granova.ds needs a data paramater that's just our two dependent scores
+#    e.g., pre & post scores on an exam, in a course, etc.
 head(rawdata)
 head(rawdata[, 1:2])
 
 granova.ds(rawdata[, 1:2])
 
 # preferably with the POST scores as column 1 and the PRE column 2
+# so that any treatment effect appears as a positive shift to the south-east
 granova.ds(rawdata[, 1:2], revc = TRUE)
+
+# I could also have achieved the same result using
+granova.ds(rawdata[, c(2, 1)])
+
 
 
 

@@ -141,11 +141,20 @@ t(XX) %*% XX  # X'X ... matrix multiplication of X-transpose and X
 # We can consider the whole matrix
 XX
 
-# ... just a single row
+# ... or just a single row by leaving the column index empty
 XX[1, ]
 
-# ... or a single column
+# ... or a single column by leaving the row index empty
 XX[, 2]
+
+# ... or a contiguous range of columns by leaving the row index empty and specifying a sequence
+XX[, 2:3]
+
+# ... or using an alternative notation for specifying a sequence
+XX[, c(2, 3)]
+
+# ... or a non-contiguous range of columns by leaving the row index empty and specifying a sequence
+XX[, c(4, 2, 3)]
 
 # ... or a single cell
 XX[1, 2]    # the cell at row 1, column 2

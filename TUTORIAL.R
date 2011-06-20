@@ -62,12 +62,6 @@ LETTERS
 
 
 
-
-# Matrices of values
-matrix(seq(1, 10), nrow=2)
-?matrix
-matrix(seq(1, 10), nrow=2) / 2
-
 # Variables store values
 # Variable names must begin with an alphabetic character
 #                cannot contain spaces
@@ -76,6 +70,61 @@ matrix(seq(1, 10), nrow=2) / 2
 #                should be meaningful within the context of your research
 # Either <- or = is used evaluate the right-hand side and store it 
 #   in the variable named on the left-hand side
+
+xx = 5
+xx
+xx + 2
+xx
+xx = xx + 2
+xx
+
+yy = seq(1, 100, by=2)
+
+
+
+
+# Selecting parts of a collection
+# consider the whole collection
+yy
+
+# In algebra, you might have a vector variable X and use "X sub 1", "X sub 2",
+# to refer to the 1st element in X or the 2nd element in X or, generally "X sub i"
+# We cant type a subscript in computer programming, so most programming languages
+# use a bracket notation to denote "X sub i": X[i]
+
+# consider the 5th element in yy
+yy[5]
+
+# consider contiguous elements: the 5th, 6th, 7th, 8th, 9th, and 10th elements in yy
+yy[5:10]
+
+# consider non-contiguous elements: the 5th, 10th, 15th, and 20th elements in yy
+yy[c(5, 10, 15, 20)]
+
+
+
+
+# consider a random purmutation of all elements in yy
+sample(yy)
+
+# consider 20 random elements from yy without replacement
+sample(yy, 20)
+
+# consider 20 random elements from yy with replacement
+# note: just because R _can_ choose elements multiple times doesn't mean it _will_
+sample(yy, 20, replace=TRUE)
+
+# consider 10 random elements from the letters collection with replacement
+sample(letters, 10, replace=TRUE)
+
+
+
+
+# Matrices of values
+matrix(seq(1, 10), nrow=2)
+?matrix
+matrix(seq(1, 10), nrow=2) / 2
+
 
 XX = matrix(seq(1, 10), nrow=2)
 XX

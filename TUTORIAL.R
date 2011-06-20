@@ -99,10 +99,13 @@ XX[1, 2]    # the cell at row 1, column 2
 dir.create("~/research/example", recursive=TRUE)
 
 # 2. Set the current working directory to that directory
+# In R-Studio, you can do this either using the menus
+#        Tools > Set working directory...
+#
+# ... or using standard R commands
 setwd("~/research/example")
 
 # 3. Save the history of your analysis regularly and annotate it
-
 savehistory("20110617-Tutorial.Rhistory")
 
 
@@ -129,7 +132,10 @@ savehistory("20110617-Tutorial.Rhistory")
 
 
 # Reading data from a file
-
+# In R-Studio, you can do this either using the menus
+#        Workspace > Import Dataset > From Text File...
+#
+# ... or using standard R commands
 raw = read.csv("raw.csv", header=TRUE)
 
 # Inspect the first few rows of data as a sanity check
@@ -262,11 +268,20 @@ panel.hist = function(x, ...)
 pairs(raw, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
 
 # Save the plot to a PDF in the working directory
+# In R-Studio, you can do this either using the menus
+#        Plots > Save plot as PDF...
+#
+# ... or using standard R commands
 pdf("pairsplot.pdf")
 pairs(raw, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
 dev.off()
+
   
 # Save the plot as a JPEG, too, for use on a webpage
+# In R-Studio, you can do this either using the menus
+#        Plots > Save plot as image...
+#
+# ... or using standard R commands
 jpeg("pairsplot.jpg")
 pairs(raw, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
 dev.off()
@@ -274,6 +289,10 @@ dev.off()
 
 # 5. Install any packages you need for more advanced/specialized analyses
 #    Be sure to install anything the package depends upon, too
+#    In R-Studio, you can do this either using the menus
+#        Tools > Install packages...
+#
+#    ... or using standard R commands
 install.packages("granova", dependencies = TRUE)
 
 # 6. Include any "library(...)" commands in your history, if you've
@@ -303,6 +322,10 @@ granova.ds(raw[, 1:2], revc = TRUE)
 
 # Save our workspace with all the data objects we've created so 
 # we can continue working with it later
+# In R-Studio, you can do this either using the menus
+#        Workspace > Save Workspace as...
+#
+# ... or using standard R commands
 save.image("20110617-Workspace.RData")
 
 # Save our history, in case we want to repeat this analysis

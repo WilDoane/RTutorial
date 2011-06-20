@@ -142,7 +142,7 @@ raw = read.csv("raw.csv", header=TRUE)
 head(raw)
 
 # We should see...
-#         X pre post gender
+#       id  pre post gender
 # 1   Aaron   5    6      m
 # 2   Betty  31   56      f
 # 3  Calvin  30   43      m
@@ -155,7 +155,7 @@ str(raw)
 
 # We should see...
 # 'data.frame':  21 obs. of  4 variables:
-#  $ X     : Factor w/ 21 levels "Aaron","Betty",..: 1 2 3 4 5 6 7 8 9 10 ...
+#  $ id     : Factor w/ 21 levels "Aaron","Betty",..: 1 2 3 4 5 6 7 8 9 10 ...
 #  $ pre   : int  5 31 30 46 3 35 20 7 11 47 ...
 #  $ post  : int  6 56 43 95 21 66 51 30 46 59 ...
 #  $ gender: Factor w/ 2 levels "f","m": 2 1 2 1 1 2 2 1 2 2 ...
@@ -171,7 +171,7 @@ rownames(raw) = raw[, 1]
 head(raw)
 
 # We should see...
-#                   X pre post gender
+#                 id  pre post gender
 # Aaron         Aaron   5    6      m
 # Betty         Betty  31   56      f
 # Calvin       Calvin  30   43      m

@@ -10,7 +10,7 @@
 # Values
 1        # integer
 1.4      # decimal fraction
-1e-2 + 7 # Scientific notation: "1 times 10 to the -2 plus 7"
+1e-2     # Scientific notation: "1 times 10 to the -2 plus 7"
 "red"    # string value
 TRUE     # boolean/logical value
 
@@ -81,7 +81,7 @@ XX = matrix(seq(1, 10), nrow=2)
 XX
 XX / 2        # computes but does not store, the value(s)
 XX
-XX <- XX / 2  # computes the value(s) and stores the result back in XX
+XX = XX / 2  # computes the value(s) and stores the result back in XX
 
 t(XX) %*% XX  # X'X ... matrix multiplication of X-transpose and X
 
@@ -287,12 +287,12 @@ panel.cor = function(x, y, digits=2, prefix="r=", cex.cor)
 
 panel.hist = function(x, ...)
 {
-    usr <- par("usr"); on.exit(par(usr))
-    par(usr = c(usr[1:2], 0, 1.5) )
-    h <- hist(x, plot = FALSE)
-    breaks <- h$breaks; nB <- length(breaks)
-    y <- h$counts; y <- y/max(y)
-    rect(breaks[-nB], 0, breaks[-1], y, col="gray", ...)
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(usr[1:2], 0, 1.5) )
+  h <- hist(x, plot = FALSE)
+  breaks <- h$breaks; nB <- length(breaks)
+  y <- h$counts; y <- y/max(y)
+  rect(breaks[-nB], 0, breaks[-1], y, col="gray", ...)
 }
   
 # Note that panel.smooth is built in, so we don't need to define it.

@@ -39,11 +39,11 @@ options(digits=10) # if you want a specific number of sig. figs
 options(digits=5) # a sane default
 
 # Collections of values
-c(1,2)                      # collection of integer values
+c(1, 2)                      # collection of integer values
 c("red", "blue")            # collection of string values
 c(TRUE, TRUE, FALSE, TRUE)  # collection of boolean (logical) values
 ?c
-c(1,2) + 1
+c(1, 2) + 1
 c("red", "blue") + 1  # ERROR
 
 
@@ -266,7 +266,7 @@ head(rawdata)
 head(rawdata[, 1:2])
 
 # Select possibly non-contiguous columns
-head(rawdata[, c(1,4)])
+head(rawdata[, c(1, 4)])
 
 # Change the order of the columns selected
 head(rawdata[, c(3, 2)])

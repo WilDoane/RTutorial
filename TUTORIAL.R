@@ -4,6 +4,9 @@
 
 # Any line or part of a line that begins with a hash mark # is a comment, ignored by R
 
+
+
+
 # Values
 1        # integer
 1.4      # decimal fraction
@@ -44,6 +47,9 @@ c(1,2) + 1
 c("red", "blue") + 1  # ERROR
 
 
+
+
+
 # Sequences of values
 seq(1, 10)
 seq(1, 10) * 2
@@ -52,6 +58,10 @@ seq(1, 10, by=2)
 
 letters
 LETTERS
+
+
+
+
 
 # Matrices of values
 matrix(seq(1, 10), nrow=2)
@@ -75,6 +85,10 @@ XX <- XX / 2  # computes the value(s) and stores the result back in XX
 
 t(XX) %*% XX  # X'X ... matrix multiplication of X-transpose and X
 
+
+
+
+# Selecting parts of a matrix
 # We can consider the whole matrix
 XX
 
@@ -86,6 +100,8 @@ XX[, 2]
 
 # ... or a single cell
 XX[1, 2]    # the cell at row 1, column 2
+
+
 
 
 
@@ -114,16 +130,26 @@ savehistory("20110617-Tutorial.Rhistory")
 #    are documented as part of your analysis.
 # 
 #    Some common R filename conventions: 
-#       raw.xls
-#       raw.csv
+#       rawdata.xls
+#       rawdata.csv
 #       20110617-cleaned-gender.RData
 #       20110618-imputed-missingvalues.RData
 #       analysis.R
+#
+#    In your Excel/comma separated values data file, be sure that
+#       every column has a header
+#       every header begins with a letter
+#       no header contains punctuation marks
+#    It's probably also best to avoid spaces in header names (R will convert them to periods)
+#       e.g.:   First Name     would become     First.Name     in R
+#    which is a bit cumbersome... easier probably to name such columns
+#       firstname
+
 
 
 
 # ** TUTORIAL NOTE **
-# At this point, you should copy the raw.xls and raw.csv files
+# At this point, you should copy the rawdata.xls and rawdata.csv files
 # to your home directory, into the research folder, into the
 # example folder.
 #
@@ -136,10 +162,10 @@ savehistory("20110617-Tutorial.Rhistory")
 #        Workspace > Import Dataset > From Text File...
 #
 # ... or using standard R commands
-raw = read.csv("raw.csv", header=TRUE)
+rawdata = read.csv("rawdata.csv", header=TRUE)
 
 # Inspect the first few rows of data as a sanity check
-head(raw)
+head(rawdata)
 
 # We should see...
 #       id  pre post gender
@@ -151,7 +177,7 @@ head(raw)
 # 6 Forrest  35   66      m
 
 # Check that columns (parameters) have been read/named correctly
-str(raw)
+str(rawdata)
 
 # We should see...
 # 'data.frame':  21 obs. of  4 variables:
@@ -164,11 +190,11 @@ str(raw)
 # and converted to a categorical factor with 21 levels.
 
 # We can consider just the first column (student names)
-head(raw[, 1])
+head(rawdata[, 1])
 
 # We really want to use those as row names, not as a parameter
-rownames(raw) = raw[, 1]
-head(raw)
+rownames(rawdata) = rawdata[, 1]
+head(rawdata)
 
 # We should see...
 #                 id  pre post gender
@@ -184,27 +210,27 @@ head(raw)
 
 # There are several ways to select columns from a matrix...
 # Select all columns from the matrix
-head(raw)
+head(rawdata)
 
 # Select contiguous columns
-head(raw[, 1:2])
+head(rawdata[, 1:2])
 
 # Select possibly non-contiguous columns
-head(raw[, c(1,4)])
+head(rawdata[, c(1,4)])
 
 # Change the order of the columns selected
-head(raw[, c(3, 2)])
+head(rawdata[, c(3, 2)])
 
 # Exclude a column
-head(raw[, -1])
+head(rawdata[, -1])
 
 
 
 
 
 # Remove the student names parameter column (column #1)
-raw = raw[, -1]
-head(raw)
+rawdata = rawdata[, -1]
+head(rawdata)
 
 # We should see...
 #           pre post gender
@@ -218,17 +244,17 @@ head(raw)
 
 
 #Generate descriptive statistics
-summary(raw)
+summary(rawdata)
 
 # You'll get a warning ("NAs introduced by coercion") for any 
 # remaining factors (categorical parameters)
-sd(raw)
+sd(rawdata)
 
 # Generate an initial exploratory scatter plot
-pairs(raw)
+pairs(rawdata)
 
 # Let's find out what the coding is for this factor
-levels(raw$gender)
+levels(rawdata$gender)
 
 # We should se...
 # [1] "f" "m"
@@ -265,7 +291,7 @@ panel.hist = function(x, ...)
 }
   
 # Note that panel.smooth is built in, so we don't need to define it.
-pairs(raw, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
+pairs(rawdata, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
 
 # Save the plot to a PDF in the working directory
 # In R-Studio, you can do this either using the menus
@@ -273,7 +299,7 @@ pairs(raw, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel
 #
 # ... or using standard R commands
 pdf("pairsplot.pdf")
-pairs(raw, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
+pairs(rawdata, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
 dev.off()
 
   
@@ -283,7 +309,7 @@ dev.off()
 #
 # ... or using standard R commands
 jpeg("pairsplot.jpg")
-pairs(raw, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
+pairs(rawdata, lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth)
 dev.off()
 
 
@@ -310,13 +336,13 @@ library(granova)
 #    and scrolling to the bottom of that help page.
 
 # granova.ds needs a data paramater that's just our dependent scores
-head(raw)
-head(raw[, 1:2])
+head(rawdata)
+head(rawdata[, 1:2])
 
-granova.ds(raw[, 1:2])
+granova.ds(rawdata[, 1:2])
 
 # preferably with the POST scores as column 1 and the PRE column 2
-granova.ds(raw[, 1:2], revc = TRUE)
+granova.ds(rawdata[, 1:2], revc = TRUE)
 
 
 
